@@ -1,36 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Evalyzer AI - Results</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/lux/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Evalyzer AI - Comparison Result</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
-<body class="container py-4">
-    <h1 class="mb-4">📊 Evalyzer AI Results</h1>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title has-text-centered">📊 Comparison Result</h1>
 
-    <div class="mb-3">
-        <strong>Model Used:</strong> {{ selected_model }}
-    </div>
+            <div class="box">
+                <h2 class="subtitle">🔍 Evaluation Summary</h2>
+                <pre style="white-space: pre-wrap;">{{ result }}</pre>
+            </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h5>📝 Paper A</h5>
-            <pre style="white-space: pre-wrap;">{{ paper_a }}</pre>
+            {% if reasoning %}
+            <div class="box">
+                <h2 class="subtitle">🧠 Model’s Reasoning</h2>
+                <pre style="white-space: pre-wrap;">{{ reasoning }}</pre>
+            </div>
+            {% endif %}
+
+            <div class="has-text-centered">
+                <a href="/" class="button is-link is-light mt-4">⬅️ Back to Home</a>
+            </div>
         </div>
-        <div class="col-md-6">
-            <h5>📝 Paper B</h5>
-            <pre style="white-space: pre-wrap;">{{ paper_b }}</pre>
-        </div>
-    </div>
-
-    <hr>
-
-    <div>
-        <h4>📈 Model Evaluation Result</h4>
-        <div class="border rounded p-3 bg-light">
-            <pre style="white-space: pre-wrap;">{{ result }}</pre>
-        </div>
-    </div>
-
-    <a href="/" class="btn btn-primary mt-4">🔄 Compare Again</a>
+    </section>
 </body>
 </html>
