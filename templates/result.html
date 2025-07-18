@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Evalyzer AI - Result</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 20px; }
-        pre { background: #f9f9f9; padding: 15px; border-left: 4px solid #ccc; white-space: pre-wrap; word-wrap: break-word; }
-        .section { margin-bottom: 30px; }
-    </style>
+    <title>Evalyzer AI - Results</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/lux/bootstrap.min.css">
 </head>
-<body>
-    <h1>📄 Evalyzer AI - Comparison Result</h1>
+<body class="container py-4">
+    <h1 class="mb-4">📊 Evalyzer AI Results</h1>
 
-    <div class="section">
-        <h2>Selected Model:</h2>
-        <p><strong>{{ selected_model }}</strong></p>
+    <div class="mb-3">
+        <strong>Model Used:</strong> {{ selected_model }}
     </div>
 
-    <div class="section">
-        <h2>📝 Paper A</h2>
-        <pre>{{ paper_a }}</pre>
+    <div class="row">
+        <div class="col-md-6">
+            <h5>📝 Paper A</h5>
+            <pre style="white-space: pre-wrap;">{{ paper_a }}</pre>
+        </div>
+        <div class="col-md-6">
+            <h5>📝 Paper B</h5>
+            <pre style="white-space: pre-wrap;">{{ paper_b }}</pre>
+        </div>
     </div>
 
-    <div class="section">
-        <h2>📝 Paper B</h2>
-        <pre>{{ paper_b }}</pre>
+    <hr>
+
+    <div>
+        <h4>📈 Model Evaluation Result</h4>
+        <div class="border rounded p-3 bg-light">
+            <pre style="white-space: pre-wrap;">{{ result }}</pre>
+        </div>
     </div>
 
-    <div class="section">
-        <h2>📊 Evaluation Result (coming soon...)</h2>
-        <p><em>LLM analysis will be shown here in the next step.</em></p>
-    </div>
-
-    <a href="{{ url_for('index') }}">🔙 Go back</a>
+    <a href="/" class="btn btn-primary mt-4">🔄 Compare Again</a>
 </body>
 </html>
