@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from groq_api import query_groq, split_thoughts
+from utils.groq_api import call_groq_model, split_thoughts 
 
 app = Flask(__name__)
 
