@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Evalyzer AI - History</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <h1 class="title">🕘 Your Evaluation History</h1>
+        {% if records %}
+            <table class="table is-fullwidth is-striped">
+                <thead>
+                    <tr>
+                        <th>Paper A Title</th>
+                        <th>Paper B Title</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record.paper_a_title }}</td>
+                        <td>{{ record.paper_b_title }}</td>
+                        <td>{{ record.timestamp }}</td>
+                        <td>
+                            <form method="post" action="{{ url_for('delete_history_item', record_id=record.id) }}">
+                                <button class="button is-danger is-small" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <form method="post" action="{{ url_for('delete_all_history') }}">
+                <button class="button is-warning mt-4" type="submit">Delete All History</button>
+            </form>
+        {% else %}
+            <p>You have no evaluation history yet.</p>
+        {% endif %}
+        <br />
+        <a href="{{ url_for('index') }}" class="button is-link">⬅️ Back to Home</a>
+    </div>
+</section>
+</body>
+</html>
