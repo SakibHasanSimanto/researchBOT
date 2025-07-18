@@ -4,6 +4,21 @@ import requests
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 
+import re
+
+def split_thoughts(output: str):
+    """
+    Extract reasoning enclosed in <think>...</think> tags if present,
+    return tuple (reasoning, rest_of_output)
+    """
+    match = re.search(r"<think>(.*?)</think>", output, flags=re.DOTALL)
+    if match:
+        thinking = match.group(1).strip()
+        final_output = re.sub(r"<think>.*?</think>", "", output, flags=re.DOTALL).strip()
+        return thinking, final_output
+    return None, output
+
+
 def call_groq_model(prompt: str, model: str) -> str:
     if not GROQ_API_KEY:
         raise ValueError("GROQ_API_KEY not found in environment variables.")
