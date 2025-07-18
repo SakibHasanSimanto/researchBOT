@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evalyzer AI</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+        textarea { width: 100%; height: 200px; margin-bottom: 15px; }
+        select, button { padding: 10px; margin-bottom: 20px; width: 100%; }
+    </style>
+</head>
+<body>
+    <h1>🔬 Unbiased Research Evaluation Tool </h1>
+    <p>Compare two research summaries without author or journal bias.</p>
+
+    <form method="POST">
+        <label for="paper_a"><strong>📝 Paper A Summary</strong></label>
+        <textarea id="paper_a" name="paper_a" placeholder="Title:\nAbstract:\nMethods:\nResults:\nContributions:\nLimitations:"></textarea>
+
+        <label for="paper_b"><strong>📝 Paper B Summary</strong></label>
+        <textarea id="paper_b" name="paper_b" placeholder="Title:\nAbstract:\nMethods:\nResults:\nContributions:\nLimitations:"></textarea>
+
+        <label for="selected_model"><strong>🤖 Choose a Model</strong></label>
+        <select id="selected_model" name="selected_model" required>
+            <option value="deepseek-r1-distill-llama-70b">DeepSeek R1 (70B Distill)</option>
+            <option value="llama3-8b-8192">Meta LLaMA 3 (8B)</option>
+            <option value="gemma2-9b-it">Google Gemma 2 (9B Instruct)</option>
+        </select>
+
+        <button type="submit">Compare</button>
+    </form>
+</body>
+</html>
