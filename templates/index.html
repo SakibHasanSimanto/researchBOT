@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Evalyzer AI</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-        textarea { width: 100%; height: 200px; margin-bottom: 15px; }
-        select, button { padding: 10px; margin-bottom: 20px; width: 100%; }
-    </style>
+    <title>Evalyzer AI - Compare Papers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/lux/bootstrap.min.css">
 </head>
-<body>
-    <h1>🔬 Unbiased Research Evaluation Tool </h1>
-    <p>Compare two research summaries without author or journal bias.</p>
+<body class="container py-5">
+    <h1 class="mb-4">📄 Evalyzer AI</h1>
+    <p class="lead">Unbiased AI-powered comparison of research summaries.</p>
 
-    <form method="POST">
-        <label for="paper_a"><strong>📝 Paper A Summary</strong></label>
-        <textarea id="paper_a" name="paper_a" placeholder="Title:\nAbstract:\nMethods:\nResults:\nContributions:\nLimitations:"></textarea>
+    <form method="POST" action="/">
+        <div class="mb-3">
+            <label for="paper_a" class="form-label">📝 Paper A Highlight / Abstract</label>
+            <textarea class="form-control" name="paper_a" rows="8" placeholder="Title:\nAbstract:\nMethods:\nResults:\nContributions:\nLimitations:" required></textarea>
+        </div>
 
-        <label for="paper_b"><strong>📝 Paper B Summary</strong></label>
-        <textarea id="paper_b" name="paper_b" placeholder="Title:\nAbstract:\nMethods:\nResults:\nContributions:\nLimitations:"></textarea>
+        <div class="mb-3">
+            <label for="paper_b" class="form-label">📝 Paper B Highlight / Abstract</label>
+            <textarea class="form-control" name="paper_b" rows="8" placeholder="Title:\nAbstract:\nMethods:\nResults:\nContributions:\nLimitations:" required></textarea>
+        </div>
 
-        <label for="selected_model"><strong>🤖 Choose a Model</strong></label>
-        <select id="selected_model" name="selected_model" required>
-            <option value="deepseek-r1-distill-llama-70b">DeepSeek R1 (70B Distill)</option>
-            <option value="llama3-8b-8192">Meta LLaMA 3 (8B)</option>
-            <option value="gemma2-9b-it">Google Gemma 2 (9B Instruct)</option>
-        </select>
+        <div class="mb-3">
+            <label for="selected_model" class="form-label">🤖 Select Evaluation Model</label>
+            <select class="form-select" name="selected_model" required>
+                <option value="deepseek-r1-distill-llama-70b" selected>DeepSeek R1 (70B Distill)</option>
+                <option value="llama3-8b-8192">Meta LLaMA 3 (8B)</option>
+                <option value="gemma2-9b-it">Google Gemma 2 (9B Instruct)</option>
+                <option value="mistral-saba-24b">Mistral SABA (24B)</option>
+            </select>
+        </div>
 
-        <button type="submit">Compare</button>
+        <button type="submit" class="btn btn-primary">⚖️ Compare Papers</button>
     </form>
 </body>
 </html>
