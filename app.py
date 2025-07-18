@@ -1,9 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for
-import os
-#-- 
-from utils.prompt_builder import build_comparison_prompt
-from utils.groq_api import call_groq_model
-#-- 
+from flask import Flask, render_template, request
+from groq_api import query_groq, split_thoughts
 
 app = Flask(__name__)
 
@@ -14,25 +10,41 @@ def index():
         paper_b = request.form.get("paper_b", "")
         selected_model = request.form.get("selected_model", "")
 
-        if not paper_a.strip() or not paper_b.strip():
-            return render_template("index.html", error="Please provide both paper abstracts.")
+        # Prompt construction
+        full_prompt = f"""
+Compare the two research papers below *strictly* based on their scientific content, and rate on a scale of 10. Include final rating in the end of your response. Be very concise with your response.
+
+Explain shortly, evaluate, and compare the following dimensions:
+1. Novelty and originality
+2. Scientific rigor and methodology
+3. Clarity of research goal and execution
+4. Depth of analysis and significance of findings
+5. Limitations and transparency
+6. Potential research impact
+
+### Paper A
+{paper_a}
+
+### Paper B
+{paper_b}
+"""
 
         try:
-            # Step 1: Build the comparison prompt
-            prompt = build_comparison_prompt(paper_a, paper_b)
+            output = query_groq(full_prompt, selected_model)
+            reasoning, final_result = split_thoughts(output)
 
-            # Step 2: Call Groq model
-            result = call_groq_model(prompt, selected_model)
-
-            # Step 3: Render result page
-            return render_template("result.html",
-                                   paper_a=paper_a,
-                                   paper_b=paper_b,
-                                   selected_model=selected_model,
-                                   result=result)
-
+            return render_template(
+                "result.html",
+                paper_a=paper_a,
+                paper_b=paper_b,
+                selected_model=selected_model,
+                result=final_result,
+                reasoning=reasoning
+            )
         except Exception as e:
-            return render_template("index.html", error=f"Something went wrong: {str(e)}")
+            return render_template("error.html", message=str(e))
 
     return render_template("index.html")
 
+if __name__ == "__main__":
+    app.run(debug=True)
