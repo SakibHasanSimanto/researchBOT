@@ -30,7 +30,7 @@ Explain shortly, evaluate, and compare the following dimensions:
 """
 
         try:
-            output = query_groq(full_prompt, selected_model)
+            output = call_groq_model(full_prompt, selected_model)
             reasoning, final_result = split_thoughts(output)
 
             return render_template(
